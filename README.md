@@ -1,2 +1,2 @@
 # bayes
-Lecture notes for Bayesian modeling
+Lecture notes for Stat465 Baysian Statistics
