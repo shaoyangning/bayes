@@ -1,0 +1,295 @@
+# Introduction
+### Stat465 *a priori* {-}
+* First words/phrases coming to your mind when you think of Bayes?
+
+## Rare events: How many twins at Williams? {-}
+* Some facts and general impressions:
+      + ~2,000 Williams students.
+      + US twin birth rate: 3/100 births ~ 5-6%.
+      
+* Statistical method: Sample survey
+      + Population: Williams students 
+      + Sample: Stat465 students
+      
+```{r, echo = T}
+n.twin <- 0
+n.sample <- 20
+```  
+
+ * We have sample size $n_{s}=$ `r n.sample`, with $n_{twin}=$ `r n.twin` within sample.
+
+### What would a Frequentist do?
+* Estimand: $p$, the proportion of twins among Williams students
+* Point estimate: sample proportion/MLE $\hat{p}$
+
+```{r, echo=T}
+phat <- n.twin/n.sample
+phat
+```
+The point estimate for Harvard twin proportion is `r phat`. Make sense?
+
+* Confidence interval: CI = Critival Value $\times$ SE
+    - one-proportion z-interval?
+    - $SE(\hat{p}) = \sqrt{\frac{\hat{p}\hat{q}}{n}}$
+    - 95% CI: $\hat{p} \pm 1.96 * SE(\hat{p})$
+
+
+```{r, echo=T}
+se <- sqrt(phat*(1-phat)/n.sample)
+twin_ci <- phat + c(-1, 1) * qnorm(0.975) * se
+twin_ci
+```
+with $\hat{p}=$ `r phat`, 95% CI for $p$ covers only a single point, 0! Making sense?!
+
+It seems Frequentist methods that we are mostly familiar with are failing us in this particular scenario. The major issue here is that the event (of being twin) of interest is rare, resulting in a population proportion too close to $0$. With limited sample size and a too-rare event, the CLT for Wald-type/one proportion z-interval is no longer valid (remember the Success/Failure condition?:), thus giving such absurd results.  
+
+Naturally and often in cases as such, we may look for Bayesian to the rescue. So before getting into all the technical details, we are introducing Bayesian learning and Bayesian inference framework at the high level.
+
+## Bayesian learning
+###  Process of Learning
+Thinking about how you learn about any new concept, knowledge, skills, for example, when you learn about Williams College, when you learn about linear model for the first time,  learn how to use R for the first time, or simply when you download and start to use Instagram or TikTok for the first time. It will generally follow the following process:
+
+* Process of Learning: 
+    + Pre-perception/belief $\rightarrow$ Experiences/Observations $\rightarrow$ Updated understanding
+    
+You may have heard about TikTok from your friends and thought it's supposed to cool and fun, or maybe silly -- these are your general pre-perception or belief on TikTok *a priori*. You decided to try it out: downloaded the app, created your own accounts, watched a few clips or live streamings, or maybe even created a few videos yourself. You may get addicted to it or just hate it --  anyway, you formed your own opinions and updated your understanding of TikTok through your own observations and first-hand experience. And this common process of learning is just naturally aligned with the framework of Bayesian learning. Or more specifically, Bayesian learning puts the general process of learning in a theoretically principled model via mathematical and probabilistic formulation.
+
+### Bayesian learning
+Generally speaking, Bayesian learning first utilizes **probability distribution** to describe or quantify one's "belief" on a certain issue. This particularly involves quantification of the uncertainty as one's belief about a certain issue is **subjective**, never accurate or exact. Particularly, when this belief or understanding is formed before the actual learning process, we call it **prior** distribution.
+
+Next, the process of learning, i.e., information gaining, new opinion/understanding forming, or **belief updating**, can be considered as **data** being collected and observed, from a statistical perspective, which will be characterized through **Bayes' Theorem**. After the learning process, the updated view/belief is then called **posterior** distribution. So we have the correspondence:
+
+* Generic learning:
+    + Pre-perception/belief $\rightarrow$ Experiences/Observations $\rightarrow$ Updated understanding
+* Bayesian learning:    
+    + Prior distribution $\rightarrow$ Data $\rightarrow$ Posterior.
+
+### Essence of Statistics: Data, Model, Inference.
+Before we formally introduce the Bayesian model, let's review and clarify several key concepts in statistical inference.
+
+* Data: $X$, observations, what we have and work with.
+    - We usually use capitalized letter $X_1,\dots, X_n$ to indicate random variables (r.v.s) modeling the randomness of (unrealized/general) sampled data
+    - Use lower-case $x_1,\dots, x_n$ to indicate their realized/observed values
+* Model: $$X|\theta \sim F(\theta).$$
+More specifically, also known as **data-generating/generative/sampling model**. It assumes or describes how data are generated or sampled from a population or an assumed infinite population ("super-population", think about 10 realied coin flips from infinite flips as population). 
+
+The randomness or uncertainty of data sampled is characterized through probabilistic distributions $F$, governed by some unknown **parameters** $\theta$, which are often quantities of interests. We often use $\Theta$ to indicate the **parameter space**, the collection of all possible values the parameters can take. 
+
+Meanwhile, there is one **true** value $\theta^*$ for the parameter based on which the data are actually sampled/generated. Estimating the unknown $\theta^*$ (with uncertainty characterized) is the ultimate goal of statistical **inference**.
+
+Since
+> "All models are wrong but some are useful. -- George Box"
+
+we may assume some **working models** for the data generating process. And in contrary to the generative model, people may only focus on **predictive model**, i.e., the assumed working models purely for the purpose of prediction, which is common and the ultimate goal in Machine Learning (ML).
+
+### Bayesian statistics: A formal overview
+More formally, **Bayesian model** or Bayesian inference framework share the following common framework, with three components:
+
+* Prior distribution $p(\theta)$ $\rightarrow$ Data $p(X|\theta)$ $\rightarrow$ Posterior $p(\theta|X)$.
+
+1. Prior
+Our prior belief, specifically the uncertainty on the value of $\theta$ before seeing the data, is modeled by the prior distribution $p(\theta)$ on the space $\Theta$. This is the most significant difference compared to Frequentist approach: The parameter $\theta$ is no longer considered fixed and unknown, as by Frequentist; it is a **random variable**, whose uncertainty is characterized by $p(\theta)$.  
+
+In practice, there are many strategies to specify prior distribution, incorporating empirical knowledge (think about rarity of twins in the Williams twin example), historical data, domain expertise, or simply some subjective perceptions. After all, proability is subjective in Bayesian.
+
+2. Updating prior with data, or evidence
+Now, with data observed, our prior belief should be updated by the observed evidence. This process is rigorously characterized by principled probability theory, i.e., conditional distribuation and the Bayes' Theorem. The updated uncertainty/belief on $\theta$ is characterized though conditionl distribution $p(\theta|X)$, i.e., the distribution of $\theta$ given that we have observed data $X$ (conditioning $X$).
+
+$$
+p(\theta|X) =\frac{p(\theta)p(X|\theta)}{p(X)}
+$$
+
+3. Posterior
+$p(\theta|X)$, the conditinal distribution of $\theta$ given observed data $X$, is also known as the posterior distribution. $p(\theta|X)$ contains all the information we have about $\theta$ given observed data, and describes our posterior belief/uncertainty on potential values of $\theta$. From a pure Bayesian perspective, our inference is already done. However, to make Bayesian inference more interpretable and comparable to Frequentists, all other common inference quantities, such as point estimator, confidence intervals, and predictions, could be derived from the posterior $p(\theta|X)$.
+
+### Bayesian vs. Frequentist: Inference v1.0
+\begin{table}[!h]
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{ l | c | c }
+   & Bayesian & Frequentist \\
+   \hline
+Randomness   & Belief & Repeated Sampling \\
+   \hline
+    Unkown parameters $\theta$ & Random & Fixed \\
+    \hline
+    Data $X$ & Fixed, Conditioned on & Repeating, random \\
+        \hline
+Model & $p(X, \theta)=p(X|\theta)p(\theta)$& $p(X|\theta)$ \\
+\hline
+Inference & Posterior distribution $p(\theta|X)$ & Point estimator $\hat\theta$, asymptotics \\
+\hline
+Estimator & ? & MLE, MoM\\
+\hline
+Uncertainty & ? & Confidence Interval  \\   
+\end{tabular}
+}
+\end{table}
+
+## Rare events: How many twins at Williams? (Ct'd) {-}
+### What would a Bayesian do?
+
+```{r, echo=F}
+b0 <- 1
+a0 <- 1
+bn <- b0 + n.sample
+an <- a0 + n.twin
+r.bayes0.hat <- an/(an+bn)
+
+#Credible
+r.bayes0.hat <- an / (an+bn)
+r.bayes0.CI <- c(qbeta(0.025, an, bn), qbeta(0.975, an, bn))
+
+a01 <- 3
+b01 <- 100
+bn1 <- b01 + n.sample
+an1 <- a01 + n.twin
+r.bayes1.hat <- an1/(an1+bn1)
+r.bayes1.CI <- c(qbeta(0.025, an1, bn1), qbeta(0.975, an1, bn1))
+```
+
+
+```{r, echo=F}
+library(ggplot2)
+library(reshape2)
+x <- seq(0,1,length=301)
+beta_dist <- data.frame(cbind(x, dbeta(x,a0,b0), 
+                              dbeta(x,a01,b01),
+                              dbeta(x,an,bn),
+                              dbeta(x, an1, bn1)))
+
+colnames(beta_dist) <- c("x","Non-informative Prior","US population-based Prior","Posterior by NInfo Prior", "Posterior by US Prior")
+beta_dist <- melt(beta_dist,x)
+
+g <- ggplot(beta_dist[beta_dist$variable%in%c("Non-informative Prior","Posterior by NInfo Prior"),], aes(x, value, color=variable)) +
+  geom_line(aes(linetype=variable),size=0.75, alpha=0.75) + 
+  labs(title="Bayesian Inference on Harvard Twin Proportion") + 
+  theme(legend.title=element_blank()) + 
+  labs(x="r", y="Density") +
+  scale_linetype_manual(values=c(2,1)) +
+  scale_size_manual(values=c(0.5,1)) +
+  scale_color_manual(values=c("#F8766D","#F8766D")) 
+```
+
+* Prior based on US population:
+
+```{r, echo=F}
+g.info <- ggplot(beta_dist[beta_dist$variable%in%c("US population-based Prior", "Posterior by US Prior"),], aes(x, value, color=variable)) +
+  geom_line(aes(linetype=variable),size=0.75, alpha=0.75) + 
+  labs(title="Bayesian Inference on Harvard Twin Proportion") + 
+  theme(legend.title=element_blank()) + 
+  labs(x="r", y="Density") +
+  scale_linetype_manual(values=c(2,1)) +
+  scale_size_manual(values=c(0.5,1)) +
+  scale_colour_manual(values=cbbPalette[-1])
+g.info
+```
+
+Bayesian point estimate (posterior mean): `r r.bayes1.hat` 
+
+Bayesian interval (credible): $(`r r.bayes1.CI[1]`, `r r.bayes1.CI[2]`).$, indicated by shaded area below.
+
+```{r, echo=F, fig.width=12, fig.height=5, warning=FALSE, message=FALSE}
+df_point1 <- data.frame(est = c(r.bayes1.hat, 0), method = as.factor(c("Bayes est", "Freq est")))
+
+g1.info <- g.info + 
+  xlim(c(0,0.3)) +
+  geom_vline(data = df_point1, aes(xintercept = est, color = method), linetype = "dotted") +
+  scale_color_manual(values=c(cbbPalette[2:3], cbbPalette[c(3,1)])) +
+  annotate("rect", xmin=r.bayes1.CI[1], xmax=r.bayes1.CI[2], ymin=0, ymax=Inf, alpha=0.1, fill=cbbPalette[3])
+g1.info
+```
+
+## Appendix A: Bayes' Theorem
+**Bayes' Theorem**
+$$
+p(A|B) = \frac{p(B|A)p(A)}{p(B)} = \frac{p(B|A)p(A)}{p(B|A)p(A) + p(B|A^C)p(A^C)}
+$$
+Mechanically, Bayes' Theorem helps us to invert the conditions of two events. Philosophically, it's about conditioning on and interpreting the **evidence** we have observed and updating our perceived uncertainty through conditional probability.
+
+### Example: Prosecutor's Fallacy
+Suppose a defendant in a criminal trial is either $G$, guilty, or $I$, innocent. In addition, suppose blood sample $B$ has found on the crime scene, which is consistent with the defendant. The prosecutor's argument is that \textbf{if there is only 1\% people in population who has this blood type, then the probability that the defendant is innocent is 1\%.} How should we judge this argument, in the sense of probability theory?
+
+\paragraph{Solution.}
+
+* Translating to probability language 
+    + "If there is only 1\% people in population (innocent) who has this blood type, then the probability that the defendant is innocent is 1\%."
+    + If $p(B|I)=0.01$, then $p(I|B)=0.01$.
+    + Our goal is to verify or dispute this: assume this is true, see what conclusion it can lead to. 
+
+* Consider the prior of guilty without evidence, $p(G)$: using Bayes' Theorem
+$$
+\begin{aligned}
+p(G|B) &= \frac{p(G)p(B|G)}{p(B)}\\
+&=  \frac{p(G)p(B|G)}{p(G)p(B|G) + p(I)p(B|I)}\\
+&= \frac{p(G)\cdot 1}{p(G)\cdot 1 + p(I)\cdot 0.01}\\
+&= \frac{p(G)\cdot 1}{p(G)\cdot 1 + (1-p(G))\cdot 0.01}
+\end{aligned}  
+$$
+
+Also know that
+$$
+p(G|B)=1-p(I|B)=0.99 
+$$
+
+* Solve for $p(G)$, we have the prior $p(G)\approx 0.497$, which means, \textbf{before the evidence is present, the defendant is already believed to have 50\% prior change of being guity.} 
+* Inconsistent with presumption of innocence.
+
+### Example: Prosecutor's Fallacy (ct'd)
+Suppose there are $500,000$ people in the town, so to be consistent with presumption of innocence, $p(G)=1/500,000$.
+
+* The chance that defendant is guilty given the evidence:
+
+$$
+\begin{aligned}
+p(G|B) &=  \frac{p(G)p(B|G)}{p(G)p(B|G) + p(I)p(B|I)}\\
+&= \frac{p(G)\cdot 1}{p(G)\cdot 1 + (1-p(G))\cdot 0.01}\\
+&\approx 1/5,000.
+\end{aligned}  
+$$
+
+## Discussion: What is Probability?
+### Classic: Counting equally likely outcomes
+Let $A$ be the event of interest and $S$ be the entire sample space. In the classic (naive) view of probability, the chance of $A$ is given by
+$$
+p(A) = \frac{|A|}{|S|},
+$$
+where $|\cdot|$ indicates the number of **equally likely** outcomes in the event. For example, consider the chance of getting a Head from a coin flip: $A = \{H\}$ and $S = \{H,T\}$, then $p(A) = \frac{1}{2}$.
+
+### Frequentist: Frequency in the long run
+This classic view of probability is straightforward, but only works when all the possible outcomes are equally. It is limited in that a minor change in the scenario as simple as a \textbf{biased} coin would disrupt the framework. This gives the popularity of the Frequentist viewpoint, which understands probability as frequency of an event in the long run, i.e., :
+$$
+P(A) = lim_{n\rightarrow \infty} \frac{n_A}{n},
+$$
+where $n_A$ is the frequency of event $A$ occurring in $n$ independent trials. For example, suppose the coin is biased towards Head, Frequentist believes the 
+
+```{r, echo = F, fig.height=2}
+n_sim <- 1000
+set.seed(465)
+coin_flip <- sample(c("H", "T"), size = n_sim, replace = T, prob = c(0.75, 0.25))
+freq_H <- sapply(1:n_sim, function(x){mean(coin_flip[1:x]=="H")})
+df_freq_H <- data.frame(num_flips = 1:n_sim, prop_H = freq_H)
+
+n_curr <- 100
+ggplot(df_freq_H[1:n_curr, ], aes(x = num_flips, y = prop_H)) +
+  geom_line() + xlim(c(1, n_sim)) + ggtitle("Number of Flips: 100") +
+  geom_hline(yintercept = 0.75) +  scale_colour_manual(values=cbbPalette[2])
+
+n_curr <- 1000
+ggplot(df_freq_H[1:n_curr, ], aes(x = num_flips, y = prop_H)) +
+  geom_line() + xlim(c(1, n_sim)) + ggtitle("Number of Flips: 1000") +
+  geom_hline(yintercept = 0.75, color = cbbPalette[2]) 
+```
+
+Most of the statistical inference methods you have learned so far are based on this Frequentist view. The randomness in our inference is completely from the data in repeated samples. That's also why when we interpret CI or p-values, we emphasize they are about "what happens in repeated sampling" or based on a "sampling distribution".
+
+### Bayesian: Subjective probability
+This view of probability as frequency of repeated random events is intuitive but less practical. For example, when we say that the effective rate of a drug is 80\%, Frequentists are thinking about applying this drug to millions of people and the proportion of effectiveness should be about 80\%, which could never actually take place in real life. In our daily life, when we incur probability statement such as calling tomorrow's chance of raining is 50/50, we are not actually thinking about infinite parallel universes where half of them will rain and halfwill shine. Instead, it is more about a quantification of our uncertainty on a random event that **we** are uncertain about. Such perspective, characterizing anything uncertain with a (more or less subjective) probability or distribution is Bayesian. So without explicit knowing it, we are already thinking Bayesian every day!
+
+Bayesian or Frequentist, they are mostly different views on what is proabability, but they all follow the same probability theories (remember Kolmogorov's Axioms?) we are all familiar with. Different views of probability may have given rise to different schools of statistics. But you don't have to be a (dogmatic) Bayesian to appreciate and apply Bayesian thinking and methodology. Through the course, we will keep comparing Bayesian approaches to their Frequentist counterparts, drawing their connections and sometimes even reaching a unification.
+
+
+
+
+
+
+
