@@ -1,0 +1,16 @@
+introduction
+what-would-a-frequentist-do
+bayesian-learning
+process-of-learning
+bayesian-learning-1
+essence-of-statistics-data-model-inference.
+bayesian-statistics-a-formal-overview
+bayesian-vs.-frequentist-inference-v1.0
+what-would-a-bayesian-do
+appendix-a-bayes-theorem
+example-prosecutors-fallacy
+example-prosecutors-fallacy-ctd
+discussion-what-is-probability
+classic-counting-equally-likely-outcomes
+frequentist-frequency-in-the-long-run
+bayesian-subjective-probability

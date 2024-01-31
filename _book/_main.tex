@@ -1,0 +1,511 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{book}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{booktabs}
+\newcommand{\indep}{\rotatebox[origin=c]{90}{$\models$}}
+\newcommand{\iid}{\overset{i.i.d}{\sim}}
+\newtheorem{myprop}{Proposition}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[]{natbib}
+\bibliographystyle{plainnat}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Stat465: Bayesian Analysis Lecture Notes},
+  pdfauthor={Shaoyang Ning},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Stat465: Bayesian Analysis Lecture Notes}
+\author{Shaoyang Ning}
+\date{2024-01-26}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{introduction}{%
+\chapter{Introduction}\label{introduction}}
+
+\hypertarget{stat465-a-priori}{%
+\subsection*{\texorpdfstring{Stat465 \emph{a priori}}{Stat465 a priori}}\label{stat465-a-priori}}
+\addcontentsline{toc}{subsection}{Stat465 \emph{a priori}}
+
+\begin{itemize}
+\tightlist
+\item
+  First words/phrases coming to your mind when you think of Bayes?
+\end{itemize}
+
+\hypertarget{rare-events-how-many-twins-at-williams}{%
+\section*{Rare events: How many twins at Williams?}\label{rare-events-how-many-twins-at-williams}}
+\addcontentsline{toc}{section}{Rare events: How many twins at Williams?}
+
+\begin{itemize}
+\item
+  Some facts and general impressions:
+  + \textasciitilde2,000 Williams students.
+  + US twin birth rate: 3/100 births \textasciitilde{} 5-6\%.
+\item
+  Statistical method: Sample survey
+  + Population: Williams students
+  + Sample: Stat465 students
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n.twin }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{n.sample }\OtherTok{\textless{}{-}} \DecValTok{20}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  We have sample size \(n_{s}=\) 20, with \(n_{twin}=\) 0 within sample.
+\end{itemize}
+
+\hypertarget{what-would-a-frequentist-do}{%
+\subsection{What would a Frequentist do?}\label{what-would-a-frequentist-do}}
+
+\begin{itemize}
+\tightlist
+\item
+  Estimand: \(p\), the proportion of twins among Williams students
+\item
+  Point estimate: sample proportion/MLE \(\hat{p}\)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{phat }\OtherTok{\textless{}{-}}\NormalTok{ n.twin}\SpecialCharTok{/}\NormalTok{n.sample}
+\NormalTok{phat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+The point estimate for Harvard twin proportion is 0. Make sense?
+
+\begin{itemize}
+\tightlist
+\item
+  Confidence interval: CI = Critival Value \(\times\) SE
+
+  \begin{itemize}
+  \tightlist
+  \item
+    one-proportion z-interval?
+  \item
+    \(SE(\hat{p}) = \sqrt{\frac{\hat{p}\hat{q}}{n}}\)
+  \item
+    95\% CI: \(\hat{p} \pm 1.96 * SE(\hat{p})\)
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{se }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(phat}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{phat)}\SpecialCharTok{/}\NormalTok{n.sample)}
+\NormalTok{twin\_ci }\OtherTok{\textless{}{-}}\NormalTok{ phat }\SpecialCharTok{+} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{) }\SpecialCharTok{*}\NormalTok{ se}
+\NormalTok{twin\_ci}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0 0
+\end{verbatim}
+
+with \(\hat{p}=\) 0, 95\% CI for \(p\) covers only a single point, 0! Making sense?!
+
+It seems Frequentist methods that we are mostly familiar with are failing us in this particular scenario. The major issue here is that the event (of being twin) of interest is rare, resulting in a population proportion too close to \(0\). With limited sample size and a too-rare event, the CLT for Wald-type/one proportion z-interval is no longer valid (remember the Success/Failure condition?:), thus giving such absurd results.
+
+Naturally and often in cases as such, we may look for Bayesian to the rescue. So before getting into all the technical details, we are introducing Bayesian learning and Bayesian inference framework at the high level.
+
+\hypertarget{bayesian-learning}{%
+\section{Bayesian learning}\label{bayesian-learning}}
+
+\hypertarget{process-of-learning}{%
+\subsection{Process of Learning}\label{process-of-learning}}
+
+Thinking about how you learn about any new concept, knowledge, skills, for example, when you learn about Williams College, when you learn about linear model for the first time, learn how to use R for the first time, or simply when you download and start to use Instagram or TikTok for the first time. It will generally follow the following process:
+
+\begin{itemize}
+\tightlist
+\item
+  Process of Learning:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Pre-perception/belief \(\rightarrow\) Experiences/Observations \(\rightarrow\) Updated understanding
+  \end{itemize}
+\end{itemize}
+
+You may have heard about TikTok from your friends and thought it's supposed to cool and fun, or maybe silly -- these are your general pre-perception or belief on TikTok \emph{a priori}. You decided to try it out: downloaded the app, created your own accounts, watched a few clips or live streamings, or maybe even created a few videos yourself. You may get addicted to it or just hate it -- anyway, you formed your own opinions and updated your understanding of TikTok through your own observations and first-hand experience. And this common process of learning is just naturally aligned with the framework of Bayesian learning. Or more specifically, Bayesian learning puts the general process of learning in a theoretically principled model via mathematical and probabilistic formulation.
+
+\hypertarget{bayesian-learning-1}{%
+\subsection{Bayesian learning}\label{bayesian-learning-1}}
+
+Generally speaking, Bayesian learning first utilizes \textbf{probability distribution} to describe or quantify one's ``belief'' on a certain issue. This particularly involves quantification of the uncertainty as one's belief about a certain issue is \textbf{subjective}, never accurate or exact. Particularly, when this belief or understanding is formed before the actual learning process, we call it \textbf{prior} distribution.
+
+Next, the process of learning, i.e., information gaining, new opinion/understanding forming, or \textbf{belief updating}, can be considered as \textbf{data} being collected and observed, from a statistical perspective, which will be characterized through \textbf{Bayes' Theorem}. After the learning process, the updated view/belief is then called \textbf{posterior} distribution. So we have the correspondence:
+
+\begin{itemize}
+\tightlist
+\item
+  Generic learning:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Pre-perception/belief \(\rightarrow\) Experiences/Observations \(\rightarrow\) Updated understanding
+  \end{itemize}
+\item
+  Bayesian learning:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Prior distribution \(\rightarrow\) Data \(\rightarrow\) Posterior.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{essence-of-statistics-data-model-inference.}{%
+\subsection{Essence of Statistics: Data, Model, Inference.}\label{essence-of-statistics-data-model-inference.}}
+
+Before we formally introduce the Bayesian model, let's review and clarify several key concepts in statistical inference.
+
+\begin{itemize}
+\tightlist
+\item
+  Data: \(X\), observations, what we have and work with.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    We usually use capitalized letter \(X_1,\dots, X_n\) to indicate random variables (r.v.s) modeling the randomness of (unrealized/general) sampled data
+  \item
+    Use lower-case \(x_1,\dots, x_n\) to indicate their realized/observed values
+  \end{itemize}
+\item
+  Model: \[X|\theta \sim F(\theta).\]
+  More specifically, also known as \textbf{data-generating/generative/sampling model}. It assumes or describes how data are generated or sampled from a population or an assumed infinite population (``super-population'', think about 10 realied coin flips from infinite flips as population).
+\end{itemize}
+
+The randomness or uncertainty of data sampled is characterized through probabilistic distributions \(F\), governed by some unknown \textbf{parameters} \(\theta\), which are often quantities of interests. We often use \(\Theta\) to indicate the \textbf{parameter space}, the collection of all possible values the parameters can take.
+
+Meanwhile, there is one \textbf{true} value \(\theta^*\) for the parameter based on which the data are actually sampled/generated. Estimating the unknown \(\theta^*\) (with uncertainty characterized) is the ultimate goal of statistical \textbf{inference}.
+
+Since
+\textgreater{} ``All models are wrong but some are useful. -- George Box''
+
+we may assume some \textbf{working models} for the data generating process. And in contrary to the generative model, people may only focus on \textbf{predictive model}, i.e., the assumed working models purely for the purpose of prediction, which is common and the ultimate goal in Machine Learning (ML).
+
+\hypertarget{bayesian-statistics-a-formal-overview}{%
+\subsection{Bayesian statistics: A formal overview}\label{bayesian-statistics-a-formal-overview}}
+
+More formally, \textbf{Bayesian model} or Bayesian inference framework share the following common framework, with three components:
+
+\begin{itemize}
+\tightlist
+\item
+  Prior distribution \(p(\theta)\) \(\rightarrow\) Data \(p(X|\theta)\) \(\rightarrow\) Posterior \(p(\theta|X)\).
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Prior
+  Our prior belief, specifically the uncertainty on the value of \(\theta\) before seeing the data, is modeled by the prior distribution \(p(\theta)\) on the space \(\Theta\). This is the most significant difference compared to Frequentist approach: The parameter \(\theta\) is no longer considered fixed and unknown, as by Frequentist; it is a \textbf{random variable}, whose uncertainty is characterized by \(p(\theta)\).
+\end{enumerate}
+
+In practice, there are many strategies to specify prior distribution, incorporating empirical knowledge (think about rarity of twins in the Williams twin example), historical data, domain expertise, or simply some subjective perceptions. After all, proability is subjective in Bayesian.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Updating prior with data, or evidence
+  Now, with data observed, our prior belief should be updated by the observed evidence. This process is rigorously characterized by principled probability theory, i.e., conditional distribuation and the Bayes' Theorem. The updated uncertainty/belief on \(\theta\) is characterized though conditionl distribution \(p(\theta|X)\), i.e., the distribution of \(\theta\) given that we have observed data \(X\) (conditioning \(X\)).
+\end{enumerate}
+
+\[
+p(\theta|X) =\frac{p(\theta)p(X|\theta)}{p(X)}
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Posterior
+  \(p(\theta|X)\), the conditinal distribution of \(\theta\) given observed data \(X\), is also known as the posterior distribution. \(p(\theta|X)\) contains all the information we have about \(\theta\) given observed data, and describes our posterior belief/uncertainty on potential values of \(\theta\). From a pure Bayesian perspective, our inference is already done. However, to make Bayesian inference more interpretable and comparable to Frequentists, all other common inference quantities, such as point estimator, confidence intervals, and predictions, could be derived from the posterior \(p(\theta|X)\).
+\end{enumerate}
+
+\hypertarget{bayesian-vs.-frequentist-inference-v1.0}{%
+\subsection{Bayesian vs.~Frequentist: Inference v1.0}\label{bayesian-vs.-frequentist-inference-v1.0}}
+
+\begin{table}[!h]
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{ l | c | c }
+   & Bayesian & Frequentist \\
+   \hline
+Randomness   & Belief & Repeated Sampling \\
+   \hline
+    Unkown parameters $\theta$ & Random & Fixed \\
+    \hline
+    Data $X$ & Fixed, Conditioned on & Repeating, random \\
+        \hline
+Model & $p(X, \theta)=p(X|\theta)p(\theta)$& $p(X|\theta)$ \\
+\hline
+Inference & Posterior distribution $p(\theta|X)$ & Point estimator $\hat\theta$, asymptotics \\
+\hline
+Estimator & ? & MLE, MoM\\
+\hline
+Uncertainty & ? & Confidence Interval  \\   
+\end{tabular}
+}
+\end{table}
+
+\hypertarget{rare-events-how-many-twins-at-williams-ctd}{%
+\section*{Rare events: How many twins at Williams? (Ct'd)}\label{rare-events-how-many-twins-at-williams-ctd}}
+\addcontentsline{toc}{section}{Rare events: How many twins at Williams? (Ct'd)}
+
+\hypertarget{what-would-a-bayesian-do}{%
+\subsection{What would a Bayesian do?}\label{what-would-a-bayesian-do}}
+
+\begin{itemize}
+\tightlist
+\item
+  Prior based on US population:
+\end{itemize}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+Bayesian point estimate (posterior mean): 0.0244
+
+Bayesian interval (credible): \((0.0051, 0.0580).\), indicated by shaded area below.
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\hypertarget{appendix-a-bayes-theorem}{%
+\section{Appendix A: Bayes' Theorem}\label{appendix-a-bayes-theorem}}
+
+\textbf{Bayes' Theorem}
+\[
+p(A|B) = \frac{p(B|A)p(A)}{p(B)} = \frac{p(B|A)p(A)}{p(B|A)p(A) + p(B|A^C)p(A^C)}
+\]
+Mechanically, Bayes' Theorem helps us to invert the conditions of two events. Philosophically, it's about conditioning on and interpreting the \textbf{evidence} we have observed and updating our perceived uncertainty through conditional probability.
+
+\hypertarget{example-prosecutors-fallacy}{%
+\subsection{Example: Prosecutor's Fallacy}\label{example-prosecutors-fallacy}}
+
+Suppose a defendant in a criminal trial is either \(G\), guilty, or \(I\), innocent. In addition, suppose blood sample \(B\) has found on the crime scene, which is consistent with the defendant. The prosecutor's argument is that \textbf{if there is only 1\% people in population who has this blood type, then the probability that the defendant is innocent is 1\%.} How should we judge this argument, in the sense of probability theory?
+
+\paragraph{Solution.}
+
+\begin{itemize}
+\tightlist
+\item
+  Translating to probability language
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ``If there is only 1\% people in population (innocent) who has this blood type, then the probability that the defendant is innocent is 1\%.''
+  \item
+    If \(p(B|I)=0.01\), then \(p(I|B)=0.01\).
+  \item
+    Our goal is to verify or dispute this: assume this is true, see what conclusion it can lead to.
+  \end{itemize}
+\item
+  Consider the prior of guilty without evidence, \(p(G)\): using Bayes' Theorem
+  \[
+  \begin{aligned}
+  p(G|B) &= \frac{p(G)p(B|G)}{p(B)}\\
+  &=  \frac{p(G)p(B|G)}{p(G)p(B|G) + p(I)p(B|I)}\\
+  &= \frac{p(G)\cdot 1}{p(G)\cdot 1 + p(I)\cdot 0.01}\\
+  &= \frac{p(G)\cdot 1}{p(G)\cdot 1 + (1-p(G))\cdot 0.01}
+  \end{aligned}  
+  \]
+\end{itemize}
+
+Also know that
+\[
+p(G|B)=1-p(I|B)=0.99 
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Solve for \(p(G)\), we have the prior \(p(G)\approx 0.497\), which means, \textbf{before the evidence is present, the defendant is already believed to have 50\% prior change of being guity.}
+\item
+  Inconsistent with presumption of innocence.
+\end{itemize}
+
+\hypertarget{example-prosecutors-fallacy-ctd}{%
+\subsection{Example: Prosecutor's Fallacy (ct'd)}\label{example-prosecutors-fallacy-ctd}}
+
+Suppose there are \(500,000\) people in the town, so to be consistent with presumption of innocence, \(p(G)=1/500,000\).
+
+\begin{itemize}
+\tightlist
+\item
+  The chance that defendant is guilty given the evidence:
+\end{itemize}
+
+\[
+\begin{aligned}
+p(G|B) &=  \frac{p(G)p(B|G)}{p(G)p(B|G) + p(I)p(B|I)}\\
+&= \frac{p(G)\cdot 1}{p(G)\cdot 1 + (1-p(G))\cdot 0.01}\\
+&\approx 1/5,000.
+\end{aligned}  
+\]
+
+\hypertarget{discussion-what-is-probability}{%
+\section{Discussion: What is Probability?}\label{discussion-what-is-probability}}
+
+\hypertarget{classic-counting-equally-likely-outcomes}{%
+\subsection{Classic: Counting equally likely outcomes}\label{classic-counting-equally-likely-outcomes}}
+
+Let \(A\) be the event of interest and \(S\) be the entire sample space. In the classic (naive) view of probability, the chance of \(A\) is given by
+\[
+p(A) = \frac{|A|}{|S|},
+\]
+where \(|\cdot|\) indicates the number of \textbf{equally likely} outcomes in the event. For example, consider the chance of getting a Head from a coin flip: \(A = \{H\}\) and \(S = \{H,T\}\), then \(p(A) = \frac{1}{2}\).
+
+\hypertarget{frequentist-frequency-in-the-long-run}{%
+\subsection{Frequentist: Frequency in the long run}\label{frequentist-frequency-in-the-long-run}}
+
+This classic view of probability is straightforward, but only works when all the possible outcomes are equally. It is limited in that a minor change in the scenario as simple as a \textbf{biased} coin would disrupt the framework. This gives the popularity of the Frequentist viewpoint, which understands probability as frequency of an event in the long run, i.e., :
+\[
+P(A) = lim_{n\rightarrow \infty} \frac{n_A}{n},
+\]
+where \(n_A\) is the frequency of event \(A\) occurring in \(n\) independent trials. For example, suppose the coin is biased towards Head, Frequentist believes the
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-9-1.pdf} \includegraphics{_main_files/figure-latex/unnamed-chunk-9-2.pdf}
+
+Most of the statistical inference methods you have learned so far are based on this Frequentist view. The randomness in our inference is completely from the data in repeated samples. That's also why when we interpret CI or p-values, we emphasize they are about ``what happens in repeated sampling'' or based on a ``sampling distribution''.
+
+\hypertarget{bayesian-subjective-probability}{%
+\subsection{Bayesian: Subjective probability}\label{bayesian-subjective-probability}}
+
+This view of probability as frequency of repeated random events is intuitive but less practical. For example, when we say that the effective rate of a drug is 80\%, Frequentists are thinking about applying this drug to millions of people and the proportion of effectiveness should be about 80\%, which could never actually take place in real life. In our daily life, when we incur probability statement such as calling tomorrow's chance of raining is 50/50, we are not actually thinking about infinite parallel universes where half of them will rain and halfwill shine. Instead, it is more about a quantification of our uncertainty on a random event that \textbf{we} are uncertain about. Such perspective, characterizing anything uncertain with a (more or less subjective) probability or distribution is Bayesian. So without explicit knowing it, we are already thinking Bayesian every day!
+
+Bayesian or Frequentist, they are mostly different views on what is proabability, but they all follow the same probability theories (remember Kolmogorov's Axioms?) we are all familiar with. Different views of probability may have given rise to different schools of statistics. But you don't have to be a (dogmatic) Bayesian to appreciate and apply Bayesian thinking and methodology. Through the course, we will keep comparing Bayesian approaches to their Frequentist counterparts, drawing their connections and sometimes even reaching a unification.
+
+  \bibliography{book.bib,packages.bib}
+
+\end{document}

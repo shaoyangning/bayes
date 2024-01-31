@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Stat465: Bayesian Analysis Lecture Notes</title>
+  <meta name="description" content="Stat465: Bayesian Analysis Lecture Notes" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Stat465: Bayesian Analysis Lecture Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Stat465: Bayesian Analysis Lecture Notes" />
+  
+  
+  
+
+<meta name="author" content="Shaoyang Ning" />
+
+
+<meta name="date" content="2024-01-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Stat465 Bayesian Statistics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="01-intro.html"><a href="#introduction"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path=""><a href="#stat465-a-priori"><i class="fa fa-check"></i>Stat465 <em>a priori</em></a></li>
+<li class="chapter" data-level="" data-path=""><a href="#rare-events-how-many-twins-at-williams"><i class="fa fa-check"></i>Rare events: How many twins at Williams?</a>
+<ul>
+<li class="chapter" data-level="1.0.1" data-path="01-intro.html"><a href="#what-would-a-frequentist-do"><i class="fa fa-check"></i><b>1.0.1</b> What would a Frequentist do?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.1" data-path="01-intro.html"><a href="#bayesian-learning"><i class="fa fa-check"></i><b>1.1</b> Bayesian learning</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="01-intro.html"><a href="#process-of-learning"><i class="fa fa-check"></i><b>1.1.1</b> Process of Learning</a></li>
+<li class="chapter" data-level="1.1.2" data-path="01-intro.html"><a href="#bayesian-learning-1"><i class="fa fa-check"></i><b>1.1.2</b> Bayesian learning</a></li>
+<li class="chapter" data-level="1.1.3" data-path="01-intro.html"><a href="#essence-of-statistics-data-model-inference."><i class="fa fa-check"></i><b>1.1.3</b> Essence of Statistics: Data, Model, Inference.</a></li>
+<li class="chapter" data-level="1.1.4" data-path="01-intro.html"><a href="#bayesian-statistics-a-formal-overview"><i class="fa fa-check"></i><b>1.1.4</b> Bayesian statistics: A formal overview</a></li>
+<li class="chapter" data-level="1.1.5" data-path="01-intro.html"><a href="#bayesian-vs.-frequentist-inference-v1.0"><i class="fa fa-check"></i><b>1.1.5</b> Bayesian vs. Frequentist: Inference v1.0</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path=""><a href="#rare-events-how-many-twins-at-williams-ctd"><i class="fa fa-check"></i>Rare events: How many twins at Williams? (Ct’d)</a>
+<ul>
+<li class="chapter" data-level="1.1.6" data-path="01-intro.html"><a href="#what-would-a-bayesian-do"><i class="fa fa-check"></i><b>1.1.6</b> What would a Bayesian do?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="01-intro.html"><a href="#appendix-a-bayes-theorem"><i class="fa fa-check"></i><b>1.2</b> Appendix A: Bayes’ Theorem</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="01-intro.html"><a href="#example-prosecutors-fallacy"><i class="fa fa-check"></i><b>1.2.1</b> Example: Prosecutor’s Fallacy</a></li>
+<li class="chapter" data-level="1.2.2" data-path="01-intro.html"><a href="#example-prosecutors-fallacy-ctd"><i class="fa fa-check"></i><b>1.2.2</b> Example: Prosecutor’s Fallacy (ct’d)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="01-intro.html"><a href="#discussion-what-is-probability"><i class="fa fa-check"></i><b>1.3</b> Discussion: What is Probability?</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="01-intro.html"><a href="#classic-counting-equally-likely-outcomes"><i class="fa fa-check"></i><b>1.3.1</b> Classic: Counting equally likely outcomes</a></li>
+<li class="chapter" data-level="1.3.2" data-path="01-intro.html"><a href="#frequentist-frequency-in-the-long-run"><i class="fa fa-check"></i><b>1.3.2</b> Frequentist: Frequency in the long run</a></li>
+<li class="chapter" data-level="1.3.3" data-path="01-intro.html"><a href="#bayesian-subjective-probability"><i class="fa fa-check"></i><b>1.3.3</b> Bayesian: Subjective probability</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Stat465: Bayesian Analysis Lecture Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Stat465: Bayesian Analysis Lecture Notes</h1>
+<p class="author"><em>Shaoyang Ning</em></p>
+<p class="date"><em>2024-01-26</em></p>
+</div>
+<div id="introduction" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Introduction<a href="#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="stat465-a-priori" class="section level3 unnumbered hasAnchor">
+<h3>Stat465 <em>a priori</em><a href="#stat465-a-priori" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>First words/phrases coming to your mind when you think of Bayes?</li>
+</ul>
+</div>
+<div id="rare-events-how-many-twins-at-williams" class="section level2 unnumbered hasAnchor">
+<h2>Rare events: How many twins at Williams?<a href="#rare-events-how-many-twins-at-williams" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p>Some facts and general impressions:
++ ~2,000 Williams students.
++ US twin birth rate: 3/100 births ~ 5-6%.</p></li>
+<li><p>Statistical method: Sample survey
++ Population: Williams students
++ Sample: Stat465 students</p></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>n.twin <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>n.sample <span class="ot">&lt;-</span> <span class="dv">20</span></span></code></pre></div>
+<ul>
+<li>We have sample size <span class="math inline">\(n_{s}=\)</span> 20, with <span class="math inline">\(n_{twin}=\)</span> 0 within sample.</li>
+</ul>
+<div id="what-would-a-frequentist-do" class="section level3 hasAnchor" number="1.0.1">
+<h3><span class="header-section-number">1.0.1</span> What would a Frequentist do?<a href="#what-would-a-frequentist-do" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Estimand: <span class="math inline">\(p\)</span>, the proportion of twins among Williams students</li>
+<li>Point estimate: sample proportion/MLE <span class="math inline">\(\hat{p}\)</span></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>phat <span class="ot">&lt;-</span> n.twin<span class="sc">/</span>n.sample</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>phat</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<p>The point estimate for Harvard twin proportion is 0. Make sense?</p>
+<ul>
+<li>Confidence interval: CI = Critival Value <span class="math inline">\(\times\)</span> SE
+<ul>
+<li>one-proportion z-interval?</li>
+<li><span class="math inline">\(SE(\hat{p}) = \sqrt{\frac{\hat{p}\hat{q}}{n}}\)</span></li>
+<li>95% CI: <span class="math inline">\(\hat{p} \pm 1.96 * SE(\hat{p})\)</span></li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(phat<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>phat)<span class="sc">/</span>n.sample)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>twin_ci <span class="ot">&lt;-</span> phat <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">*</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> se</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>twin_ci</span></code></pre></div>
+<pre><code>## [1] 0 0</code></pre>
+<p>with <span class="math inline">\(\hat{p}=\)</span> 0, 95% CI for <span class="math inline">\(p\)</span> covers only a single point, 0! Making sense?!</p>
+<p>It seems Frequentist methods that we are mostly familiar with are failing us in this particular scenario. The major issue here is that the event (of being twin) of interest is rare, resulting in a population proportion too close to <span class="math inline">\(0\)</span>. With limited sample size and a too-rare event, the CLT for Wald-type/one proportion z-interval is no longer valid (remember the Success/Failure condition?:), thus giving such absurd results.</p>
+<p>Naturally and often in cases as such, we may look for Bayesian to the rescue. So before getting into all the technical details, we are introducing Bayesian learning and Bayesian inference framework at the high level.</p>
+</div>
+</div>
+<div id="bayesian-learning" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Bayesian learning<a href="#bayesian-learning" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="process-of-learning" class="section level3 hasAnchor" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Process of Learning<a href="#process-of-learning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Thinking about how you learn about any new concept, knowledge, skills, for example, when you learn about Williams College, when you learn about linear model for the first time, learn how to use R for the first time, or simply when you download and start to use Instagram or TikTok for the first time. It will generally follow the following process:</p>
+<ul>
+<li>Process of Learning:
+<ul>
+<li>Pre-perception/belief <span class="math inline">\(\rightarrow\)</span> Experiences/Observations <span class="math inline">\(\rightarrow\)</span> Updated understanding</li>
+</ul></li>
+</ul>
+<p>You may have heard about TikTok from your friends and thought it’s supposed to cool and fun, or maybe silly – these are your general pre-perception or belief on TikTok <em>a priori</em>. You decided to try it out: downloaded the app, created your own accounts, watched a few clips or live streamings, or maybe even created a few videos yourself. You may get addicted to it or just hate it – anyway, you formed your own opinions and updated your understanding of TikTok through your own observations and first-hand experience. And this common process of learning is just naturally aligned with the framework of Bayesian learning. Or more specifically, Bayesian learning puts the general process of learning in a theoretically principled model via mathematical and probabilistic formulation.</p>
+</div>
+<div id="bayesian-learning-1" class="section level3 hasAnchor" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Bayesian learning<a href="#bayesian-learning-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Generally speaking, Bayesian learning first utilizes <strong>probability distribution</strong> to describe or quantify one’s “belief” on a certain issue. This particularly involves quantification of the uncertainty as one’s belief about a certain issue is <strong>subjective</strong>, never accurate or exact. Particularly, when this belief or understanding is formed before the actual learning process, we call it <strong>prior</strong> distribution.</p>
+<p>Next, the process of learning, i.e., information gaining, new opinion/understanding forming, or <strong>belief updating</strong>, can be considered as <strong>data</strong> being collected and observed, from a statistical perspective, which will be characterized through <strong>Bayes’ Theorem</strong>. After the learning process, the updated view/belief is then called <strong>posterior</strong> distribution. So we have the correspondence:</p>
+<ul>
+<li>Generic learning:
+<ul>
+<li>Pre-perception/belief <span class="math inline">\(\rightarrow\)</span> Experiences/Observations <span class="math inline">\(\rightarrow\)</span> Updated understanding</li>
+</ul></li>
+<li>Bayesian learning:
+<ul>
+<li>Prior distribution <span class="math inline">\(\rightarrow\)</span> Data <span class="math inline">\(\rightarrow\)</span> Posterior.</li>
+</ul></li>
+</ul>
+</div>
+<div id="essence-of-statistics-data-model-inference." class="section level3 hasAnchor" number="1.1.3">
+<h3><span class="header-section-number">1.1.3</span> Essence of Statistics: Data, Model, Inference.<a href="#essence-of-statistics-data-model-inference." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before we formally introduce the Bayesian model, let’s review and clarify several key concepts in statistical inference.</p>
+<ul>
+<li>Data: <span class="math inline">\(X\)</span>, observations, what we have and work with.
+<ul>
+<li>We usually use capitalized letter <span class="math inline">\(X_1,\dots, X_n\)</span> to indicate random variables (r.v.s) modeling the randomness of (unrealized/general) sampled data</li>
+<li>Use lower-case <span class="math inline">\(x_1,\dots, x_n\)</span> to indicate their realized/observed values</li>
+</ul></li>
+<li>Model: <span class="math display">\[X|\theta \sim F(\theta).\]</span>
+More specifically, also known as <strong>data-generating/generative/sampling model</strong>. It assumes or describes how data are generated or sampled from a population or an assumed infinite population (“super-population”, think about 10 realied coin flips from infinite flips as population).</li>
+</ul>
+<p>The randomness or uncertainty of data sampled is characterized through probabilistic distributions <span class="math inline">\(F\)</span>, governed by some unknown <strong>parameters</strong> <span class="math inline">\(\theta\)</span>, which are often quantities of interests. We often use <span class="math inline">\(\Theta\)</span> to indicate the <strong>parameter space</strong>, the collection of all possible values the parameters can take.</p>
+<p>Meanwhile, there is one <strong>true</strong> value <span class="math inline">\(\theta^*\)</span> for the parameter based on which the data are actually sampled/generated. Estimating the unknown <span class="math inline">\(\theta^*\)</span> (with uncertainty characterized) is the ultimate goal of statistical <strong>inference</strong>.</p>
+<p>Since
+&gt; “All models are wrong but some are useful. – George Box”</p>
+<p>we may assume some <strong>working models</strong> for the data generating process. And in contrary to the generative model, people may only focus on <strong>predictive model</strong>, i.e., the assumed working models purely for the purpose of prediction, which is common and the ultimate goal in Machine Learning (ML).</p>
+</div>
+<div id="bayesian-statistics-a-formal-overview" class="section level3 hasAnchor" number="1.1.4">
+<h3><span class="header-section-number">1.1.4</span> Bayesian statistics: A formal overview<a href="#bayesian-statistics-a-formal-overview" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>More formally, <strong>Bayesian model</strong> or Bayesian inference framework share the following common framework, with three components:</p>
+<ul>
+<li>Prior distribution <span class="math inline">\(p(\theta)\)</span> <span class="math inline">\(\rightarrow\)</span> Data <span class="math inline">\(p(X|\theta)\)</span> <span class="math inline">\(\rightarrow\)</span> Posterior <span class="math inline">\(p(\theta|X)\)</span>.</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Prior
+Our prior belief, specifically the uncertainty on the value of <span class="math inline">\(\theta\)</span> before seeing the data, is modeled by the prior distribution <span class="math inline">\(p(\theta)\)</span> on the space <span class="math inline">\(\Theta\)</span>. This is the most significant difference compared to Frequentist approach: The parameter <span class="math inline">\(\theta\)</span> is no longer considered fixed and unknown, as by Frequentist; it is a <strong>random variable</strong>, whose uncertainty is characterized by <span class="math inline">\(p(\theta)\)</span>.</li>
+</ol>
+<p>In practice, there are many strategies to specify prior distribution, incorporating empirical knowledge (think about rarity of twins in the Williams twin example), historical data, domain expertise, or simply some subjective perceptions. After all, proability is subjective in Bayesian.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Updating prior with data, or evidence
+Now, with data observed, our prior belief should be updated by the observed evidence. This process is rigorously characterized by principled probability theory, i.e., conditional distribuation and the Bayes’ Theorem. The updated uncertainty/belief on <span class="math inline">\(\theta\)</span> is characterized though conditionl distribution <span class="math inline">\(p(\theta|X)\)</span>, i.e., the distribution of <span class="math inline">\(\theta\)</span> given that we have observed data <span class="math inline">\(X\)</span> (conditioning <span class="math inline">\(X\)</span>).</li>
+</ol>
+<p><span class="math display">\[
+p(\theta|X) =\frac{p(\theta)p(X|\theta)}{p(X)}
+\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Posterior
+<span class="math inline">\(p(\theta|X)\)</span>, the conditinal distribution of <span class="math inline">\(\theta\)</span> given observed data <span class="math inline">\(X\)</span>, is also known as the posterior distribution. <span class="math inline">\(p(\theta|X)\)</span> contains all the information we have about <span class="math inline">\(\theta\)</span> given observed data, and describes our posterior belief/uncertainty on potential values of <span class="math inline">\(\theta\)</span>. From a pure Bayesian perspective, our inference is already done. However, to make Bayesian inference more interpretable and comparable to Frequentists, all other common inference quantities, such as point estimator, confidence intervals, and predictions, could be derived from the posterior <span class="math inline">\(p(\theta|X)\)</span>.</li>
+</ol>
+</div>
+<div id="bayesian-vs.-frequentist-inference-v1.0" class="section level3 hasAnchor" number="1.1.5">
+<h3><span class="header-section-number">1.1.5</span> Bayesian vs. Frequentist: Inference v1.0<a href="#bayesian-vs.-frequentist-inference-v1.0" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+
+</div>
+</div>
+<div id="rare-events-how-many-twins-at-williams-ctd" class="section level2 unnumbered hasAnchor">
+<h2>Rare events: How many twins at Williams? (Ct’d)<a href="#rare-events-how-many-twins-at-williams-ctd" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="what-would-a-bayesian-do" class="section level3 hasAnchor" number="1.1.6">
+<h3><span class="header-section-number">1.1.6</span> What would a Bayesian do?<a href="#what-would-a-bayesian-do" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Prior based on US population:</li>
+</ul>
+<p><img src="_main_files/figure-html/unnamed-chunk-7-1.png" width="960" /></p>
+<p>Bayesian point estimate (posterior mean): 0.0244</p>
+<p>Bayesian interval (credible): <span class="math inline">\((0.0051, 0.0580).\)</span>, indicated by shaded area below.</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-8-1.png" width="1152" /></p>
+</div>
+</div>
+<div id="appendix-a-bayes-theorem" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Appendix A: Bayes’ Theorem<a href="#appendix-a-bayes-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Bayes’ Theorem</strong>
+<span class="math display">\[
+p(A|B) = \frac{p(B|A)p(A)}{p(B)} = \frac{p(B|A)p(A)}{p(B|A)p(A) + p(B|A^C)p(A^C)}
+\]</span>
+Mechanically, Bayes’ Theorem helps us to invert the conditions of two events. Philosophically, it’s about conditioning on and interpreting the <strong>evidence</strong> we have observed and updating our perceived uncertainty through conditional probability.</p>
+<div id="example-prosecutors-fallacy" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Example: Prosecutor’s Fallacy<a href="#example-prosecutors-fallacy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Suppose a defendant in a criminal trial is either <span class="math inline">\(G\)</span>, guilty, or <span class="math inline">\(I\)</span>, innocent. In addition, suppose blood sample <span class="math inline">\(B\)</span> has found on the crime scene, which is consistent with the defendant. The prosecutor’s argument is that How should we judge this argument, in the sense of probability theory?</p>
+<ul>
+<li>Translating to probability language
+<ul>
+<li>“If there is only 1% people in population (innocent) who has this blood type, then the probability that the defendant is innocent is 1%.”</li>
+<li>If <span class="math inline">\(p(B|I)=0.01\)</span>, then <span class="math inline">\(p(I|B)=0.01\)</span>.</li>
+<li>Our goal is to verify or dispute this: assume this is true, see what conclusion it can lead to.</li>
+</ul></li>
+<li>Consider the prior of guilty without evidence, <span class="math inline">\(p(G)\)</span>: using Bayes’ Theorem
+<span class="math display">\[
+\begin{aligned}
+p(G|B) &amp;= \frac{p(G)p(B|G)}{p(B)}\\
+&amp;=  \frac{p(G)p(B|G)}{p(G)p(B|G) + p(I)p(B|I)}\\
+&amp;= \frac{p(G)\cdot 1}{p(G)\cdot 1 + p(I)\cdot 0.01}\\
+&amp;= \frac{p(G)\cdot 1}{p(G)\cdot 1 + (1-p(G))\cdot 0.01}
+\end{aligned}  
+\]</span></li>
+</ul>
+<p>Also know that
+<span class="math display">\[
+p(G|B)=1-p(I|B)=0.99
+\]</span></p>
+<ul>
+<li>Solve for <span class="math inline">\(p(G)\)</span>, we have the prior <span class="math inline">\(p(G)\approx 0.497\)</span>, which means, </li>
+<li>Inconsistent with presumption of innocence.</li>
+</ul>
+</div>
+<div id="example-prosecutors-fallacy-ctd" class="section level3 hasAnchor" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Example: Prosecutor’s Fallacy (ct’d)<a href="#example-prosecutors-fallacy-ctd" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Suppose there are <span class="math inline">\(500,000\)</span> people in the town, so to be consistent with presumption of innocence, <span class="math inline">\(p(G)=1/500,000\)</span>.</p>
+<ul>
+<li>The chance that defendant is guilty given the evidence:</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+p(G|B) &amp;=  \frac{p(G)p(B|G)}{p(G)p(B|G) + p(I)p(B|I)}\\
+&amp;= \frac{p(G)\cdot 1}{p(G)\cdot 1 + (1-p(G))\cdot 0.01}\\
+&amp;\approx 1/5,000.
+\end{aligned}  
+\]</span></p>
+</div>
+</div>
+<div id="discussion-what-is-probability" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Discussion: What is Probability?<a href="#discussion-what-is-probability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="classic-counting-equally-likely-outcomes" class="section level3 hasAnchor" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Classic: Counting equally likely outcomes<a href="#classic-counting-equally-likely-outcomes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let <span class="math inline">\(A\)</span> be the event of interest and <span class="math inline">\(S\)</span> be the entire sample space. In the classic (naive) view of probability, the chance of <span class="math inline">\(A\)</span> is given by
+<span class="math display">\[
+p(A) = \frac{|A|}{|S|},
+\]</span>
+where <span class="math inline">\(|\cdot|\)</span> indicates the number of <strong>equally likely</strong> outcomes in the event. For example, consider the chance of getting a Head from a coin flip: <span class="math inline">\(A = \{H\}\)</span> and <span class="math inline">\(S = \{H,T\}\)</span>, then <span class="math inline">\(p(A) = \frac{1}{2}\)</span>.</p>
+</div>
+<div id="frequentist-frequency-in-the-long-run" class="section level3 hasAnchor" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Frequentist: Frequency in the long run<a href="#frequentist-frequency-in-the-long-run" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This classic view of probability is straightforward, but only works when all the possible outcomes are equally. It is limited in that a minor change in the scenario as simple as a coin would disrupt the framework. This gives the popularity of the Frequentist viewpoint, which understands probability as frequency of an event in the long run, i.e., :
+<span class="math display">\[
+P(A) = lim_{n\rightarrow \infty} \frac{n_A}{n},
+\]</span>
+where <span class="math inline">\(n_A\)</span> is the frequency of event <span class="math inline">\(A\)</span> occurring in <span class="math inline">\(n\)</span> independent trials. For example, suppose the coin is biased towards Head, Frequentist believes the</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-9-1.png" width="960" /><img src="_main_files/figure-html/unnamed-chunk-9-2.png" width="960" /></p>
+<p>Most of the statistical inference methods you have learned so far are based on this Frequentist view. The randomness in our inference is completely from the data in repeated samples. That’s also why when we interpret CI or p-values, we emphasize they are about “what happens in repeated sampling” or based on a “sampling distribution”.</p>
+</div>
+<div id="bayesian-subjective-probability" class="section level3 hasAnchor" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Bayesian: Subjective probability<a href="#bayesian-subjective-probability" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This view of probability as frequency of repeated random events is intuitive but less practical. For example, when we say that the effective rate of a drug is 80%, Frequentists are thinking about applying this drug to millions of people and the proportion of effectiveness should be about 80%, which could never actually take place in real life. In our daily life, when we incur probability statement such as calling tomorrow’s chance of raining is 50/50, we are not actually thinking about infinite parallel universes where half of them will rain and halfwill shine. Instead, it is more about a quantification of our uncertainty on a random event that <strong>we</strong> are uncertain about. Such perspective, characterizing anything uncertain with a (more or less subjective) probability or distribution is Bayesian. So without explicit knowing it, we are already thinking Bayesian every day!</p>
+<p>Bayesian or Frequentist, they are mostly different views on what is proabability, but they all follow the same probability theories (remember Kolmogorov’s Axioms?) we are all familiar with. Different views of probability may have given rise to different schools of statistics. But you don’t have to be a (dogmatic) Bayesian to appreciate and apply Bayesian thinking and methodology. Through the course, we will keep comparing Bayesian approaches to their Frequentist counterparts, drawing their connections and sometimes even reaching a unification.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

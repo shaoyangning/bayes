@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Page not found | Stat465: Bayesian Analysis Lecture Notes</title>
+  <meta name="description" content="Page not found | Stat465: Bayesian Analysis Lecture Notes" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Page not found | Stat465: Bayesian Analysis Lecture Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Page not found | Stat465: Bayesian Analysis Lecture Notes" />
+  
+  
+  
+
+<meta name="author" content="Shaoyang Ning" />
+
+
+<meta name="date" content="2024-01-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Stat465 Bayesian Statistics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path=""><a href="#introduction"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path=""><a href="#stat465-a-priori"><i class="fa fa-check"></i>Stat465 <em>a priori</em></a></li>
+<li class="chapter" data-level="" data-path=""><a href="#rare-events-how-many-twins-at-williams"><i class="fa fa-check"></i>Rare events: How many twins at Williams?</a>
+<ul>
+<li class="chapter" data-level="1.0.1" data-path=""><a href="#what-would-a-frequentist-do"><i class="fa fa-check"></i><b>1.0.1</b> What would a Frequentist do?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.1" data-path=""><a href="#bayesian-learning"><i class="fa fa-check"></i><b>1.1</b> Bayesian learning</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path=""><a href="#process-of-learning"><i class="fa fa-check"></i><b>1.1.1</b> Process of Learning</a></li>
+<li class="chapter" data-level="1.1.2" data-path=""><a href="#bayesian-learning-1"><i class="fa fa-check"></i><b>1.1.2</b> Bayesian learning</a></li>
+<li class="chapter" data-level="1.1.3" data-path=""><a href="#essence-of-statistics-data-model-inference."><i class="fa fa-check"></i><b>1.1.3</b> Essence of Statistics: Data, Model, Inference.</a></li>
+<li class="chapter" data-level="1.1.4" data-path=""><a href="#bayesian-statistics-a-formal-overview"><i class="fa fa-check"></i><b>1.1.4</b> Bayesian statistics: A formal overview</a></li>
+<li class="chapter" data-level="1.1.5" data-path=""><a href="#bayesian-vs.-frequentist-inference-v1.0"><i class="fa fa-check"></i><b>1.1.5</b> Bayesian vs. Frequentist: Inference v1.0</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path=""><a href="#rare-events-how-many-twins-at-williams-ctd"><i class="fa fa-check"></i>Rare events: How many twins at Williams? (Ct’d)</a>
+<ul>
+<li class="chapter" data-level="1.1.6" data-path=""><a href="#what-would-a-bayesian-do"><i class="fa fa-check"></i><b>1.1.6</b> What would a Bayesian do?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#appendix-a-bayes-theorem"><i class="fa fa-check"></i><b>1.2</b> Appendix A: Bayes’ Theorem</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path=""><a href="#example-prosecutors-fallacy"><i class="fa fa-check"></i><b>1.2.1</b> Example: Prosecutor’s Fallacy</a></li>
+<li class="chapter" data-level="1.2.2" data-path=""><a href="#example-prosecutors-fallacy-ctd"><i class="fa fa-check"></i><b>1.2.2</b> Example: Prosecutor’s Fallacy (ct’d)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#discussion-what-is-probability"><i class="fa fa-check"></i><b>1.3</b> Discussion: What is Probability?</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path=""><a href="#classic-counting-equally-likely-outcomes"><i class="fa fa-check"></i><b>1.3.1</b> Classic: Counting equally likely outcomes</a></li>
+<li class="chapter" data-level="1.3.2" data-path=""><a href="#frequentist-frequency-in-the-long-run"><i class="fa fa-check"></i><b>1.3.2</b> Frequentist: Frequency in the long run</a></li>
+<li class="chapter" data-level="1.3.3" data-path=""><a href="#bayesian-subjective-probability"><i class="fa fa-check"></i><b>1.3.3</b> Bayesian: Subjective probability</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Stat465: Bayesian Analysis Lecture Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="page-not-found" class="section level1">
+<h1>Page not found</h1>
+<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
+<p>You may want to try searching to find the page's new location, or use
+the table of contents to find the page you are looking for.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/%s",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

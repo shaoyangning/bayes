@@ -1,0 +1,58 @@
+--- 
+title: "Stat465: Bayesian Analysis Lecture Notes"
+author: "Shaoyang Ning"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: 
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+header-includes:
+    - \newcommand{\indep}{\rotatebox[origin=c]{90}{$\models$}}
+    - \newcommand{\iid}{\overset{i.i.d}{\sim}}
+    - \newtheorem{myprop}{Proposition}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,
+	fig.height = 4,
+	fig.width = 10,
+	message = FALSE,
+	warning = FALSE
+)
+knitr::knit_hooks$set(inline = function(x) {
+  if(any(is.numeric(x))){
+      if(any( x > 10000)){
+        x <- sprintf("%1.4e", x)
+        paste(x, collapse = ", ")
+      } else if(x%%1==0){
+        x
+      } else{
+        x <- sprintf("%1.4f", x)
+        paste(x, collapse = ", ")
+      }
+  } else{
+   x 
+  }
+})
+
+options("digits" = 4)
+library(ggplot2)
+library(gridExtra)
+
+cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+```
+
+
+
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
